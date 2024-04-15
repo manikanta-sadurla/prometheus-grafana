@@ -8,4 +8,14 @@ after terraform is executed,we need to edit two files.
 Scroll down to the point where you see this ‘type: ClusterIP’ and change it to these exact words:  `LoadBalancer`
 
 ```kubectl edit svc prometheus-kube-prometheus-prometheus -n prometheus``` .
-Scroll down to the point where you see this ‘type: ClusterIP’ and change it to these exact words:  `LoadBalancer`
+Scroll down to the point where you see this ‘type: ClusterIP’ and change it to these exact words:  `LoadBalancer`.
+
+Grafana and Promethsues Loadbalancer will be created post the above modification.
+
+Grafana : The username is `admin`, and the password is `prom-operator`.
+
+Prometheus : add port 9090 to the loadlbalancer url.
+
+
+
+
