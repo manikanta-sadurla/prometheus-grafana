@@ -1,0 +1,13 @@
+blackboxExporter:
+  config:
+    modules:
+      http_2xx:
+        prober: http
+        timeout: 5s
+        http:
+          valid_status_codes: []  # Optionally specify valid status codes
+          method: GET  # HTTP method to use, default is GET
+          # Define your endpoints here
+          endpoints:
+            - url: "google.com"
+            - url: "gmail.com"
