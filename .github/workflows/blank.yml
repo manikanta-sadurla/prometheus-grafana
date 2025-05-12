@@ -5,6 +5,7 @@ name: CI-GO
 # Controls when the workflow will run
 on:
   # Allows you to run this workflow manually from the Actions tab
+  pull_request:
   workflow_dispatch:
     # inputs:
     #   pr_number:
