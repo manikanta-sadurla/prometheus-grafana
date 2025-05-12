@@ -7,8 +7,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      commit_sha:
-        description: 'Commit SHA to check out'
+      pr_number:
+        description: 'Pull Request Number'
         required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -23,7 +23,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.commit_sha }}
+          ref: refs/pull/${{ github.event.inputs.pr_number }}/head
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
