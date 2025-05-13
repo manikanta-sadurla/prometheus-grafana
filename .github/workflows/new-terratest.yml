@@ -2,14 +2,14 @@ name: CI-GO-NEW-2
 
 on:
   # Only trigger manually - no automatic PR triggering
+  pull_request_target:
+    types: [edited]
   workflow_dispatch:
     inputs:
       pr_number:
         description: 'Pull Request Number'
         required: true
-
-  pull_request_target:
-    types: [edited]
+    
 
 permissions:
   contents: read
@@ -19,7 +19,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'ready-for-merge')
     steps:
       - name: Checkout PR code
         uses: actions/checkout@v4
