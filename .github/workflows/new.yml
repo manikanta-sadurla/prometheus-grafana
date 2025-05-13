@@ -23,9 +23,11 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     needs: build
-    if: always()  # This ensures it runs whether build fails or succeeds
+    if: always()
     steps:
-      - name: Final Notification
+      - name: ✅ CI Finished - See below
         run: |
           echo "✅ CI check complete."
           echo "ℹ️ To re-run the workflow, edit the PR or trigger it manually from the Actions tab."
+          echo "::notice::✅ CI check complete."
+          echo "::notice::ℹ️ To re-run the workflow, edit the PR or trigger it manually from the Actions tab."
