@@ -18,7 +18,7 @@ permissions:
 jobs:
   check_manual_run:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'workflow_dispatch' # Prevent automatic run on PR
     steps:
       - name: Check if manual run exists
         id: check_status
