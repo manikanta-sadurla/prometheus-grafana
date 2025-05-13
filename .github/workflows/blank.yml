@@ -15,7 +15,7 @@ permissions:
   statuses: write
 
 jobs:
-  build:
+  terratest:
     runs-on: ubuntu-latest
     name: Terratest Checks
     if: github.event_name == 'workflow_dispatch' # Prevent automatic run on PR
@@ -46,7 +46,7 @@ jobs:
               repo: context.repo.repo,
               sha: sha,
               state: 'success', // or 'failure' if the job fails
-              context: 'build', // must match required check name
-              description: 'Manual build completed successfully',
+              context: 'terratest', // must match required check name
+              description: 'Manual terratest completed successfully',
               target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}`
             });
