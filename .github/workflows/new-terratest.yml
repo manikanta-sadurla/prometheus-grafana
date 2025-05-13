@@ -2,7 +2,7 @@ name: CI-GO-NEW-2
 
 on:
   # Only trigger manually - no automatic PR triggering
-  pull_request_target:
+  pull_request:
     types: [edited]
   workflow_dispatch:
     inputs:
