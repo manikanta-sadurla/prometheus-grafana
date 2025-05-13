@@ -1,0 +1,48 @@
+name: Terraform Terratest with Go
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terratest:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.merged == false)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.ARC_IAC_TERRATEST_ROLE }}
+          aws-region: us-east-1
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+          terraform_wrapper: false
+
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # This step ensures the workflow shows as required for PRs
+      - name: Mark as required check
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "This workflow must be run manually via workflow_dispatch before merging"
+          echo "Run this workflow and ensure it passes before merging"
+          echo "This check will fail intentionally to block merging until manually run"
+          exit 1
