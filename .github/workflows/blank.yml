@@ -1,9 +1,11 @@
 name: CI-GO
 
 on:
+  # pull_request:
+  #   branches:
+  #     - main # Or your main branch name
   pull_request:
-    branches:
-      - main # Or your main branch name
+    types: [opened]
   workflow_dispatch:
     inputs:
       pr_number:
@@ -18,7 +20,7 @@ jobs:
   terratest:
     runs-on: ubuntu-latest
     name: Terratest Checks
-    if: github.event_name == 'workflow_dispatch' # Prevent automatic run on PR
+    # if: github.event_name == 'workflow_dispatch' # Prevent automatic run on PR
     steps:
       - name: Checkout PR code
         uses: actions/checkout@v4
